@@ -8,10 +8,12 @@
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 	$(function(){
-		$("#img").attr("src" , getQueryString("img"));
+		var imgSrc = getQueryString("p1");//图片路径
+		var textVal = getQueryString("p2");//文本内容
+		$("#img").attr("src" , imgSrc);
 		$("#img").attr("width" , "100%");
 		$("#img").attr("height" , "95%");
-		$("#val").val(getQueryString("ss"));
+		$("#val").val(textVal);
 		
 		$("#val").click(function(){
 			$(this).select();
@@ -21,7 +23,8 @@
 	
 	function getQueryString(name) {  
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");  
-		var r = window.location.search.substr(1).match(reg);  
-		if (r != null) return unescape(r[2]); return null;  
+		var urlParam = window.location.search + window.location.hash;
+		var r = urlParam.substr(1).match(reg);  
+		if (r != null) return r[2]; return null;  
 	} 
 </script>
