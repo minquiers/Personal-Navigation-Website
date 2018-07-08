@@ -47,13 +47,30 @@ function initTabs() {
 			if (tab.values && tab.values.length > 0) {
 				for (var i = 0; i < tab.values.length; i++) {
 					var value = tab.values[i];
-					var tabBody = "<div class=\"col-sm-3 col-xs-4\"><a href=\"" + value.href + "\" target=\"_blank\" class=\"thumbnail\"><img src=\"" + value.img + "\" width=\"50%\" alt=\"" + value.caption + "\"><div class=\"caption\"><strong>" + value.caption + "</strong></div></a></div>";
+					var href = mRedirect() ? (value.mhref?value.mhref:value.href) : value.href;
+					var tabBody = "<div class=\"col-sm-3 col-xs-4\"><a href=\"" + href + "\" target=\"_blank\" class=\"thumbnail\"><img src=\"" + value.img + "\" width=\"50%\" alt=\"" + value.caption + "\"><div class=\"caption\"><strong>" + value.caption + "</strong></div></a></div>";
 					tbodys += tabBody;
 				}
 				$(".tab-content").append($("<div role=\"tabpanel\" class=\"tab-pane " + (tab.active ? "active" : "") + " \" id=\"" + tab.key + "\">" + tbodys + "</div>"));
 			}
 		}
 	}
+};
+
+//是否重定向
+function mRedirect() {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+        return true;
+    }
 };
 
 //搜索框自动完成
