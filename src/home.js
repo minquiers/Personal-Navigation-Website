@@ -51,7 +51,7 @@ function initTabs() {
 					if(value.hidden){
 						continue;
 					}
-					var tabBody = "<div class=\"col-sm-3 col-xs-4\"><a href=\"" + href + "\" target=\"_blank\" class=\"thumbnail\"><img src=\"" + (value.img?value.img:config.default.img) + "\" width=\"50%\" alt=\"" + value.caption + "\"><div class=\"caption\"><strong>" + value.caption + "</strong></div></a></div>";
+					var tabBody = "<div class=\"col-sm-3 col-xs-4\"><a title=\""+(value.title?value.title:"")+"\" href=\"" + href + "\" target=\"_blank\" class=\"thumbnail\"><img src=\"" + (value.img?value.img:config.default.img) + "\" width=\"50%\" alt=\"" + value.caption + "\"><div class=\"caption\"><strong>" + value.caption + "</strong></div></a></div>";
 					tbodys += tabBody;
 				}
 				$(".tab-content").append($("<div role=\"tabpanel\" class=\"tab-pane " + (tab.active ? "active" : "") + " \" id=\"" + tab.key + "\">" + tbodys + "</div>"));
