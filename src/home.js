@@ -38,6 +38,8 @@ function initSearchEngine() {
 //初始化tab
 function initTabs() {
 	if (config && config.tabs) {
+		var isMobile = mRedirect();
+		var mobileMaxCaption = 5;
 		for (var index in config.tabs) {
 			var tab = config.tabs[index];
 			var tabHeader = $("<li role=\"presentation\" class=\"" + (tab.active ? "active" : "") + "\"><a href=\"#" + tab.key + "\" aria-controls=\"" + tab.key + "\" role=\"tab\" data-toggle=\"tab\">" + tab.name + "</a></li>");
@@ -47,11 +49,15 @@ function initTabs() {
 			if (tab.values && tab.values.length > 0) {
 				for (var i = 0; i < tab.values.length; i++) {
 					var value = tab.values[i];
-					var href = mRedirect() ? (value.mhref?value.mhref:value.href) : value.href;
+					var href = isMobile ? (value.mhref?value.mhref:value.href) : value.href;
 					if(value.hidden){
 						continue;
 					}
-					var tabBody = "<div data-clipboard-text=\""+(value.title?value.title:" ")+"\" class=\"col-sm-3 col-xs-4\"><a  title=\""+(value.title?value.title:"")+"\" href=\"" + href + "\" target=\"_blank\" class=\"thumbnail\"><img src=\"" + (value.img?value.img:config.default.img) + "\" width=\"50%\" alt=\"" + value.caption + "\"><div class=\"caption\"><strong>" + value.caption + "</strong></div></a></div>";
+					var title = (value.title?value.title:' ');
+					if(value.caption && isMobile && value.caption.length > mobileMaxCaption){
+						value.caption = value.caption.substring(0,mobileMaxCaption) + "..";
+					}
+					var tabBody = "<div data-clipboard-text=\""+title+"\" class=\"col-sm-3 col-xs-4\"><a  title=\""+title+"\" href=\"" + href + "\" target=\"_blank\" class=\"thumbnail\"><img src=\"" + (value.img?value.img:config.default.img) + "\" width=\"50%\" alt=\"" + value.caption + "\"><div class=\"caption\"><strong>" + value.caption + "</strong></div></a></div>";
 					tbodys += tabBody;
 				}
 				$(".tab-content").append($("<div role=\"tabpanel\" class=\"tab-pane " + (tab.active ? "active" : "") + " \" id=\"" + tab.key + "\">" + tbodys + "</div>"));
@@ -213,4 +219,6 @@ $(function () {
 	initTabs();
 	
 	var clipboard = new ClipboardJS('div');
+	
+	console.info("如果一个社会不愿意付出智慧应得的价值，那社会就永远得不到智慧带来的优质产品。\n整个社会创新乏力和智慧产出得不到认可有很大关系。\n如果你愿意为之付出价值，从业人员自然会用心去做出优质的产品，否则，他们就会得过且过，敷衍了事。\n");
 });
