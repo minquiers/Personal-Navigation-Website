@@ -1,5 +1,8 @@
 # Personal Navigation Website (个人浏览器导航主页)
 
+2021-06-01<br/>
+1.添加tab使用hidden:true隐藏
+
 2021-04-01<br/>
 1.手机端标题过长样式出错问题<br/>
 
