@@ -42,6 +42,9 @@ function initTabs() {
 		var mobileMaxCaption = 5;
 		for (var index in config.tabs) {
 			var tab = config.tabs[index];
+			if(tab.hidden){
+				continue;
+			}
 			var tabHeader = $("<li role=\"presentation\" class=\"" + (tab.active ? "active" : "") + "\"><a href=\"#" + tab.key + "\" aria-controls=\"" + tab.key + "\" role=\"tab\" data-toggle=\"tab\">" + tab.name + "</a></li>");
 			$(".nav-tabs").append(tabHeader);
 
