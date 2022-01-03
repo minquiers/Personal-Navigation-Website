@@ -1,2 +1,3 @@
 jira-001
+jira-001 do some thing
 master-dosomething
