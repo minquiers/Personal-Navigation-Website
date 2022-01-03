@@ -2,3 +2,4 @@ add master 001.txt
 add master 002.txt
 jira-004 add 004.txt
 jira-004 add 005.txt
+jira-004 add 006.txt
